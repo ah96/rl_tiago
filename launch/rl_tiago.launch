@@ -24,7 +24,7 @@
   <env name="LC_NUMERIC" value="C" />
 
   <!-- start up world -->
-  <include file="$(find my_simulation)/launch/pal_gazebo.launch">
+  <include file="$(find rl_tiago)/launch/pal_gazebo.launch">
     <arg name="world" value="$(arg world)"/>
     <arg name="gui" value="$(arg gui)"/>
     <arg name="debug" value="$(arg debug)"/>
@@ -35,7 +35,7 @@
   </include>
 
   <!-- spawn robot in simulation -->
-  <include file="$(find my_simulation)/launch/tiago_spawn.launch">
+  <include file="$(find rl_tiago)/launch/tiago_spawn.launch">
     <arg name="arm" value="$(arg arm)"/>
     <arg name="end_effector" value="$(arg end_effector)"/>
     <arg name="ft_sensor" value="$(arg ft_sensor)"/>
@@ -46,7 +46,7 @@
   </include>
 
   <!-- bring up robot -->
-  <include file="$(find my_simulation)/launch/simulation_tiago_bringup.launch">
+  <include file="$(find rl_tiago)/launch/simulation_tiago_bringup.launch">
     <arg name="arm" value="$(arg arm)"/>
     <arg name="end_effector" value="$(arg end_effector)"/>
     <arg name="ft_sensor" value="$(arg ft_sensor)"/>
@@ -65,7 +65,7 @@
   </group>
 
   <group if="$(arg tuck_arm)">
-      <node name="tuck_arm" pkg="my_simulation" type="tuck_arm.py" output="screen"/>
+      <node name="tuck_arm" pkg="rl_tiago" type="tuck_arm.py" output="screen"/>
   </group>
   <node name="image_proc" pkg="image_proc" type="image_proc" ns="xtion/rgb"/>
 </launch>

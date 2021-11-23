@@ -1,22 +1,22 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(my_simulation)
+project(rl_tiago)
 
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
+  #roscpp
   rospy
   std_msgs
-  pal_detection_msgs
-  cv_bridge
-  image_transport
+  gazebo_msgs
+  geometry_msgs
+  nav_msgs
 )
 
-find_package(OpenCV REQUIRED)
+catkin_python_setup()
 
 catkin_package(
-  CATKIN_DEPENDS pal_detection_msgs roscpp image_transport cv_bridge
+  CATKIN_DEPENDS gazebo_msgs geometry_msgs nav_msgs
 )
 
-include_directories(SYSTEM ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
+include_directories(SYSTEM ${catkin_INCLUDE_DIRS})
 
 foreach(dir launch worlds)
     install(DIRECTORY ${dir}/
@@ -25,6 +25,3 @@ endforeach(dir)
 
 install(PROGRAMS scripts/tuck_arm.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-add_executable(detect_person src/detect_person.cpp)
-target_link_libraries(detect_person ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
